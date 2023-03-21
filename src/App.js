@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import CustomButton from "./components/Buttons";
+import { useState } from "react";
+import Code from "./components/Code";
+import Text from "./components/Text";
+import SpaceButton from "./components/SpaceButton";
 
 function App() {
+  const [durations, setDurations] = useState([]);
+  const onBtnClick = (duration) => {
+    setDurations((prevDurations) => [...prevDurations, duration]);
+  };
+  const handleAddSpace = () => {
+    setDurations((prevDurations) => [...prevDurations, " "]);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CustomButton onClick={onBtnClick} />
+      <SpaceButton addSpace={handleAddSpace} />
+      <Code durations={durations} />
+      <Text durations={durations} />
     </div>
   );
 }
